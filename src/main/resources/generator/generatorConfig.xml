@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <properties resource="generator/config.properties"/>
+    <classPathEntry  location="D:\work4\tomcat2\apache-tomcat-6.0.532\webapps\MIS\WEB-INF\lib\ojdbc6.jar"/>
+
+    <!-- 一个数据库一个context -->
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+          <!-- 为了防止生成的代码中有很多注释，比较难看，加入下面的配置控制 -->  
+        <commentGenerator>  
+            <property name="suppressAllComments" value="true" />  
+            <property name="suppressDate" value="true" />  
+        </commentGenerator>  
+        <!-- jdbc连接 -->
+        <jdbcConnection driverClass="${datasource.driverClassName}"
+                        connectionURL="${datasource.url}"
+                        userId="${datasource.username}"
+                        password="${datasource.password}">
+        </jdbcConnection>
+        <!-- 生成实体类地址 -->
+        <javaModelGenerator targetPackage="${targetModelPackage}" targetProject="${targetJavaProject}">
+        </javaModelGenerator>
+        <!-- 生成mapxml文件 -->
+        <sqlMapGenerator targetPackage="${targetXMLPackage}" targetProject="${targetResourcesProject}">
+        </sqlMapGenerator>
+        <!-- 生成mapxml对应client，也就是接口dao|mapper -->
+        <javaClientGenerator targetPackage="${targetMapperPackage}" targetProject="${targetJavaProject}"
+                             type="XMLMAPPER"/>
+  
+        <table tableName="conf_parser" domainObjectName="ConfParser" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="select SEQ_CONF_PARSER.NEXTVAL from dual" identity="false" />
+        </table>
+    </context>
+</generatorConfiguration>

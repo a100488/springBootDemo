@@ -1,0 +1,12 @@
+.project
+.factorypath
+*.class
+*.log
+**/target/**
+**/.settings/**
+.classpath
+.svn/**
+.idea
+*.iml
+.metadata/**
+logging.fileDir*

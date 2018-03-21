@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.guige.springbootdemo.mapper.ConfParserMapper">
+  <resultMap id="BaseResultMap" type="com.guige.springbootdemo.entity.ConfParser">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="PROD_CD" jdbcType="VARCHAR" property="prodCd" />
+    <result column="PARSER_NAME" jdbcType="VARCHAR" property="parserName" />
+    <result column="MULTIPLE_DATE_FLAG" jdbcType="CHAR" property="multipleDateFlag" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from CONF_PARSER
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.guige.springbootdemo.entity.ConfParser">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+      select SEQ_CONF_PARSER.NEXTVAL from dual
+    </selectKey>
+    insert into CONF_PARSER (ID, PROD_CD, PARSER_NAME, 
+      MULTIPLE_DATE_FLAG)
+    values (#{id,jdbcType=DECIMAL}, #{prodCd,jdbcType=VARCHAR}, #{parserName,jdbcType=VARCHAR}, 
+      #{multipleDateFlag,jdbcType=CHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.guige.springbootdemo.entity.ConfParser">
+    update CONF_PARSER
+    set PROD_CD = #{prodCd,jdbcType=VARCHAR},
+      PARSER_NAME = #{parserName,jdbcType=VARCHAR},
+      MULTIPLE_DATE_FLAG = #{multipleDateFlag,jdbcType=CHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select ID, PROD_CD, PARSER_NAME, MULTIPLE_DATE_FLAG
+    from CONF_PARSER
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select ID, PROD_CD, PARSER_NAME, MULTIPLE_DATE_FLAG
+    from CONF_PARSER
+  </select>
+ 
+</mapper>
